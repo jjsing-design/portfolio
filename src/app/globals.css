@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/*
+  Design tokens. Tailwind v4 reads this block and generates the matching
+  utilities, so `--color-accent` here is what makes `text-accent` exist.
+
+  Contrast against the paper background was measured, not guessed:
+    ink        17.2:1   body and headings
+    ink-muted   6.4:1   secondary text  (AA needs 4.5:1)
+    accent      6.4:1   links and labels
+    paper on accent 6.4:1  filled buttons
+*/
+@theme {
+  --color-paper: #f8f7f4;
+  --color-surface: #ffffff;
+  --color-ink: #141413;
+  --color-ink-muted: #5c5a53;
+  --color-rule: #dedbd1;
+  --color-accent: #9c3b13;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+/*
+  One light theme, on purpose. A single theme that is verified for contrast and
+  focus visibility is worth more than two themes that are half-checked, and
+  declaring color-scheme stops the browser from tinting form controls dark.
+*/
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/*
+  Focus ring is defined once, globally, so no component can forget it. Using
+  :focus-visible keeps it off mouse clicks and on for keyboard navigation.
+*/
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Anchor links land below the sticky header instead of behind it. */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
