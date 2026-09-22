@@ -1,4 +1,4 @@
-import { caseStudies, statusLabels } from "@/lib/case-studies";
+import { caseStudies } from "@/lib/case-studies";
 import { githubProfileUrl, mailtoUrl, siteConfig } from "@/lib/site";
 import { ActionLink, ExternalLinkHint } from "./action-link";
 
@@ -13,7 +13,7 @@ export function Hero() {
   return (
     <section id="top" aria-labelledby="hero-heading" className="pb-16 pt-14 sm:pb-20 sm:pt-20 lg:pt-28">
       <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">
-        {siteConfig.role}
+        <span className="text-accent">{siteConfig.role}</span>
         <span className="mx-2 text-rule" aria-hidden="true">
           /
         </span>
@@ -67,7 +67,7 @@ export function Hero() {
         {currentWork ? (
           <div>
             <dt className="font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">
-              {statusLabels[currentWork.status]}
+              Currently building
             </dt>
             <dd className="mt-2 text-sm leading-relaxed">
               <a href="#work" className="underline decoration-rule decoration-2 underline-offset-4 hover:decoration-accent">

@@ -10,6 +10,7 @@ import { StatusBadge } from "./status-badge";
 export function CaseStudyCard({ study }: { study: CaseStudy }) {
   const headingId = `${study.id}-title`;
   const hasLinks = Boolean(study.caseStudyHref || study.repoUrl);
+  const chainLabel = study.status === "live" ? "Shows" : "Will show";
 
   return (
     <li className="rounded-2xl border border-rule bg-surface p-6 sm:p-8">
@@ -59,7 +60,7 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
             id={`${study.id}-chain`}
             className="font-mono text-xs uppercase tracking-[0.18em] text-ink-muted"
           >
-            Will show
+            {chainLabel}
           </p>
           <ul
             aria-labelledby={`${study.id}-chain ${headingId}`}

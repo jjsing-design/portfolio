@@ -26,8 +26,12 @@ export const siteConfig = {
    */
   githubUsername: "jjsing-design",
 
-  /** The tools JJ actually works in, shown as a short list in the hero. */
-  tools: ["Figma", "Cursor", "Claude", "TypeScript", "React", "GitHub"],
+  /**
+   * The tools JJ actually works in, shown as a short list in the hero. GitHub is
+   * deliberately absent — it is a link in the header, so listing it here too
+   * would be saying the same thing twice.
+   */
+  tools: ["Figma", "Cursor", "Claude", "TypeScript", "React"],
 
   /**
    * The repo holding this site. Linked as "Source" in the footer. Every other
