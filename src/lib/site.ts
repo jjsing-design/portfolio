@@ -44,6 +44,14 @@ export const siteConfig = {
   // Optional — null until JJ supplies the real value. See docs/placeholders.md.
   // ---------------------------------------------------------------------------
 
+  /**
+   * The site's own public address, e.g. "https://jocosing.vercel.app". Link
+   * previews need a full URL to fetch the preview image from, so set this once
+   * the first deploy has a URL. On Vercel, Next.js falls back to the deployment's
+   * own URL when this is null, which is why previews still work before then.
+   */
+  url: null as string | null,
+
   /** e.g. "Remote — United States". Rendered in the hero meta list when set. */
   location: null as string | null,
 

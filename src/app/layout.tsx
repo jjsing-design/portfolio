@@ -26,13 +26,32 @@ const geistMono = Geist_Mono({
 
 const description = `${siteConfig.positioning} ${siteConfig.intro}`;
 
+/*
+  Link preview metadata. The picture itself is `opengraph-image.tsx`; Next.js finds
+  it by filename and writes the og:image tags, so it is not named here.
+
+  `metadataBase` is the prefix that turns the image's path into the absolute URL a
+  messaging app can fetch. Until `siteConfig.url` is set, Next.js falls back to the
+  Vercel deployment URL in production — correct on Vercel, and the reason the local
+  build prints a "metadataBase is not set" notice rather than failing.
+
+  `twitter` only needs the card shape: Next.js copies the title, description, and
+  image across from `openGraph`. `summary_large_image` is what makes X, Slack, and
+  iMessage show the wide picture instead of a thumbnail beside the text.
+*/
 export const metadata: Metadata = {
+  metadataBase: siteConfig.url ? new URL(siteConfig.url) : undefined,
   title: `${siteConfig.name} — ${siteConfig.role}`,
   description,
   openGraph: {
     title: `${siteConfig.name} — ${siteConfig.role}`,
     description,
     type: "website",
+    siteName: siteConfig.name,
+    url: siteConfig.url ?? undefined,
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
