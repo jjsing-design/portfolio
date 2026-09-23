@@ -208,6 +208,41 @@ Two decisions are worth naming:
   four in-page anchors would be more code and worse UX. Email stays visible at every
   width, because it is the one thing a reviewer might want immediately.
 
+### The link preview image
+
+`src/app/opengraph-image.tsx` is the picture that shows up when this URL is pasted
+into a message. It is worth understanding because it is the only part of the site a
+reviewer sees *before* deciding whether to click.
+
+**It is drawn in code, not exported from Figma.** That is the decision to be able to
+defend. A PNG exported once is correct once: change the positioning statement and the
+preview keeps showing the old one, silently, in every message already sent. This file
+reads `siteConfig`, so the two cannot disagree. The cost is that it is drawn by
+Satori, a small layout engine that supports flexbox and a subset of CSS — no grid, no
+Tailwind — which is why the colour tokens are repeated as literals at the top of the
+file and the styles are inline.
+
+**It is the hero, reduced, not a new composition.** Name row over a hairline, the mono
+eyebrow, the positioning statement at display size with the same `-0.035em` tracking,
+and a metadata row on the bottom rule. Same five tokens, same two faces, same
+label treatment. Someone who sees the preview and then opens the site should not feel
+they arrived somewhere else.
+
+One typographic call worth naming: the headline measure is capped at 820px rather than
+the full frame. That is what breaks the sentence into two balanced lines instead of
+leaving `and` stranded at the end of the first. The page gets this from CSS
+`text-wrap: balance`; Satori does not support it, so the measure does the same job.
+
+**The fonts are committed to the repo.** `assets/fonts/` holds three Geist `.ttf`
+files. Satori cannot reach the `next/font` faces the page uses — it needs raw font
+data — so the same two families are checked in, with their SIL Open Font License
+alongside them. They are read once at module scope and only at build time.
+
+**Twitter needs one line, not a second image.** `twitter: { card:
+"summary_large_image" }` in `layout.tsx` is the whole of it; Next.js copies the title,
+description, and image over from `openGraph`. Writing a separate `twitter-image.tsx`
+would generate the same picture twice.
+
 ### The 404
 
 The site is one page today, but `/work/...` routes are coming, so a stale or mistyped

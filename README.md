@@ -59,16 +59,18 @@ Then open http://localhost:43317.
 ```
 src/
   app/
-    layout.tsx        Fonts, metadata, skip link, header and footer shell
-    page.tsx          Composes the five sections; owns the page measure only
-    globals.css       Design tokens, base styles, global focus ring
-    not-found.tsx     Styled 404
-    icon.svg          Favicon
-  components/         Presentational only — no content lives here
+    layout.tsx           Fonts, metadata, skip link, header and footer shell
+    page.tsx             Composes the five sections; owns the page measure only
+    globals.css          Design tokens, base styles, global focus ring
+    not-found.tsx        Styled 404
+    icon.svg             Favicon
+    opengraph-image.tsx  Draws the link preview image
+  components/            Presentational only — no content lives here
   lib/
-    site.ts           Every fact about JJ, including the GitHub handle
-    case-studies.ts   The work queue and its status type
-    process.ts        The four process steps
+    site.ts              Every fact about JJ, including the GitHub handle
+    case-studies.ts      The work queue and its status type
+    process.ts           The four process steps
+assets/fonts/            Geist .ttf files, used only to draw the preview image
 scripts/
   accessibility-check.mjs
 ```
@@ -98,6 +100,27 @@ Verified with `npm run check:a11y` against the production build at 320px, 390px,
 
 Colour contrast was measured rather than assumed; the ratios are recorded in a comment
 at the top of `globals.css`. The lowest is 6.4:1 against a 4.5:1 requirement.
+
+## Link previews
+
+Paste this URL into Slack, iMessage, or LinkedIn and the app unfurls it into a card
+instead of a bare link. Three pieces make that work:
+
+- `src/app/opengraph-image.tsx` draws a 1200×630 PNG at build time. It is generated
+  from `src/lib/site.ts`, so the preview always says whatever the headline says.
+- Next.js turns any `opengraph-image` file into an image route and writes the
+  `og:image` tags automatically — the filename *is* the registration.
+- `layout.tsx` adds `twitter: { card: "summary_large_image" }`, which is what asks for
+  the wide picture rather than a thumbnail. Next.js copies the title, description, and
+  image across from `openGraph`.
+
+To see it: `npm run build && npm run start -- --port 43317`, then open
+http://localhost:43317/opengraph-image.
+
+The preview image needs a full `https://` address to be fetched from. On Vercel,
+Next.js fills that in from the deployment URL. Anywhere else, set `url` in
+`src/lib/site.ts` — until you do, a local build prints a `metadataBase is not set`
+notice, which is expected rather than a failure.
 
 ## Deployment
 

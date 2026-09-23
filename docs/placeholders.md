@@ -12,6 +12,7 @@ component changes needed.
 
 | Field | What it adds | Where it shows |
 | --- | --- | --- |
+| `url` | The site's own public address, e.g. `"https://jocosing.vercel.app"` | Not on the page — it is the address link previews fetch the preview image from. Optional on Vercel, which fills it in for you; set it if you move to a custom domain or another host |
 | `background` | Two or three sentences in your own voice about your path into design engineering | Third paragraph of the About section |
 | `location` | e.g. `"Remote — United States"` | Third item in the hero metadata row |
 | `linkedinUrl` | Your full LinkedIn profile URL | A LinkedIn button in the Contact section |
@@ -65,6 +66,3 @@ Not oversights — decisions, each defensible if raised:
   ready via `resumeUrl`; a full `/resume` route is a later addition.
 - **No photo of you.** There was no image to use, and a stock headshot would be worse
   than none. If you add one, `public/` plus `next/image` is the path.
-- **No Open Graph image.** Link previews will show the title and description but no
-  picture. Worth adding before you send the URL to the sponsor, since that preview is
-  the first thing he will see in a message.
