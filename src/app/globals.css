@@ -57,6 +57,15 @@ body {
   scroll-margin-top: 6rem;
 }
 
+/*
+  The Anthem prototype keeps the same focus ring and only swaps the color,
+  so a keyboard user still sees where focus is without borrowing the
+  portfolio accent.
+*/
+.anthem :focus-visible {
+  outline-color: #005eb8;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
