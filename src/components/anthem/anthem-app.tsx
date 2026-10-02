@@ -62,8 +62,9 @@ export function AnthemApp() {
     );
   }
 
+  // pb-36 keeps the last card above the fixed bottom nav.
   return (
-    <div className="flex flex-1 flex-col pb-20">
+    <div className="flex flex-1 flex-col pb-36">
       <div className="flex-1">
         {screen.tab === "home" ? <HomeScreen /> : null}
         {screen.tab === "claims" ? <ClaimsScreen /> : null}
