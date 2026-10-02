@@ -1,17 +1,22 @@
 import { ActionLink } from "@/components/action-link";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { mailtoUrl } from "@/lib/site";
 
 /**
  * The site is one page today, but case study routes are coming, so a mistyped or
- * stale URL needs a real answer rather than the framework default. It reuses the
- * same header, footer, tokens, and button styles as the rest of the site.
+ * stale URL needs a real answer rather than the framework default. Header and
+ * footer are rendered here because unmatched URLs use the root layout, which
+ * no longer includes the portfolio chrome.
  */
 export default function NotFound() {
   return (
-    <main
-      id="main"
-      className="mx-auto flex w-full max-w-5xl flex-1 flex-col justify-center px-6 py-24 lg:px-8"
-    >
+    <>
+      <SiteHeader />
+      <main
+        id="main"
+        className="mx-auto flex w-full max-w-5xl flex-1 flex-col justify-center px-6 py-24 lg:px-8"
+      >
       <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
         Error 404
       </p>
@@ -28,6 +33,8 @@ export default function NotFound() {
           Tell me the link is broken
         </ActionLink>
       </div>
-    </main>
+      </main>
+      <SiteFooter />
+    </>
   );
 }

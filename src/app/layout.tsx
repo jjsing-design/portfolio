@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -73,9 +71,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to main content
         </a>
-        <SiteHeader />
+        {/*
+          Header and footer are not here. They belong to the portfolio route
+          group. The Anthem prototype is its own route group and must not
+          inherit the portfolio chrome.
+        */}
         {children}
-        <SiteFooter />
       </body>
     </html>
   );
